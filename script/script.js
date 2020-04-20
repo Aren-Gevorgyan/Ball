@@ -44,6 +44,6 @@ $(document).ready(function () {
 
     let ball = new Ball();
     ball.createBall();
-    console.log(window.innerHeight);
+
 });
 
