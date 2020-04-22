@@ -12,6 +12,7 @@ $(document).ready(function () {
         }
 
         createBall() {
+            //add classCount do not change the style of all classes
             let ball = `<div class = ball${classCount}></div>`;
             $(".contentBall").append(ball);
             console.log(classCount);
@@ -51,7 +52,7 @@ $(document).ready(function () {
 
     function start() {
         let startButton = $(".start");
-        startButton.click(createCloneBall);
+        startButton.click(createBall());
     }
 
     function stop() {
@@ -68,8 +69,7 @@ $(document).ready(function () {
         });
     }
 
-    function createCloneBall() {
-        setClickFirstBall();
+    function createBall() {
         stopClick = false;
         let countObj = setInterval(() => {
             if (stopClick === true) {
@@ -77,22 +77,27 @@ $(document).ready(function () {
             } else {
                 ifClickBallCreateClone();
             }
-        }, 2500);
+        }, 2000);
     }
 
     function ifClickBallCreateClone() {
         let ball = new Ball();
         ball.createBall();
-        createClone(ball);
+        getElement(ball);
     }
 
-    function createClone(ball) {
+    function getElement(ball) {
         $(".contentBall").children().click(function () {
             if (isIfNotClickButton()) {
-                ball.createBall();
+                createClone(this);
                 createAnimate(this, ball);
             }
         });
+    }
+
+    function createClone(id) {
+        let cloneBall = id.cloneNode(true);
+        $(".contentBall").append(cloneBall);
     }
 
     function createAnimate(id, ball) {
@@ -100,15 +105,6 @@ $(document).ready(function () {
             "left": `${ball.getRandomNumber(window.innerWidth - ball.size)}px`,
             "top": `${ball.getRandomNumber(window.innerHeight - ball.size)}px`,
         });
-    }
-
-    function setClickFirstBall() {
-        let ball = new Ball();
-        ball.createBall();
-        $(".contentBall").children().eq(0).click(function () {
-            ball.createBall();
-            createAnimate($(this), ball);
-        })
     }
 
     function isIfNotClickButton(id) {
