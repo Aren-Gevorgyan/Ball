@@ -15,7 +15,6 @@ $(document).ready(function () {
             //add classCount do not change the style of all classes
             let ball = `<div class = ball${classCount}></div>`;
             $(".contentBall").append(ball);
-            console.log(classCount);
             let styleBall = $(`.ball${classCount}`);
             this.createStyleBall(styleBall);
             classCount++;
@@ -50,11 +49,6 @@ $(document).ready(function () {
     stop();
     clear();
 
-    function start() {
-        let startButton = $(".start");
-        startButton.click(createBall());
-    }
-
     function stop() {
         let stopButton = $(".stop");
         stopButton.click(() => {
@@ -65,39 +59,44 @@ $(document).ready(function () {
     function clear() {
         let clearButton = $(".clear");
         clearButton.click(() => {
+            stopClick = true;
             $(".contentBall").empty();
         });
     }
 
-    function createBall() {
-        stopClick = false;
-        let countObj = setInterval(() => {
-            if (stopClick === true) {
-                clearInterval(countObj);
-            } else {
-                ifClickBallCreateClone();
-            }
-        }, 2000);
+    function start() {
+        let startButton = $(".start");
+        startButton.click(function () {
+            stopClick = false;
+            let countObj = setInterval(() => {
+                if (stopClick === true) {
+                    clearInterval(countObj);
+                } else {
+                    ifClickBallCreateClone();
+                }
+            }, 2000);
+        });
     }
 
     function ifClickBallCreateClone() {
         let ball = new Ball();
         ball.createBall();
-        getElement(ball);
+        catchClick(ball);
     }
 
-    function getElement(ball) {
-        $(".contentBall").children().click(function () {
+    function catchClick(ball) {
+        $(".contentBall").children().bind("click", function () {
             if (isIfNotClickButton()) {
-                createClone(this);
+                createClone(this, ball);
                 createAnimate(this, ball);
             }
         });
     }
 
-    function createClone(id) {
-        let cloneBall = id.cloneNode(true);
+    function createClone(id, ball) {
+        let cloneBall = id.cloneNode(false);
         $(".contentBall").append(cloneBall);
+        catchClick(ball)
     }
 
     function createAnimate(id, ball) {

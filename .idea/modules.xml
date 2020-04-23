@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Ball.iml" filepath="$PROJECT_DIR$/.idea/Ball.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../VTC_JS/js9/.idea/js9.iml" filepath="$PROJECT_DIR$/../VTC_JS/js9/.idea/js9.iml" />
     </modules>
   </component>
 </project>
