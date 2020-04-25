@@ -1,5 +1,10 @@
+.ball {
+    border-radius: 50%;
+    position: absolute;
+    z-index: -10;
+}
 
-button{
+button {
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -8,12 +13,15 @@ button{
     box-shadow: 2px 1px 1px gray;
     outline: none;
 }
-.start{
+
+.start {
     background-color: darkgreen;
 }
-.stop{
+
+.stop {
     background-color: goldenrod;
 }
-.clear{
+
+.clear {
     background-color: firebrick;
 }
